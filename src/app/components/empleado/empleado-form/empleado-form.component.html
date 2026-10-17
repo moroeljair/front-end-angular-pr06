@@ -1,0 +1,29 @@
+<div class="col-md-4">
+  <div class="card">
+    <div class="card-body">
+      <h1>Registro de Nuevo Empleado</h1>
+      <form #empleadoForm="ngForm" (ngSubmit)="guardarEmpleado(empleadoForm)">
+        <div class="form-group">
+          <input type="text" class="form-control" name="nombre"
+            placeholder="Ingrese su nombre" [(ngModel)]="formData.nombre">
+        </div>
+        <div class="form-group">
+          <input type="text" name="cargo" class="form-control"
+            placeholder="Ingrese su cargo" [(ngModel)]="formData.cargo">
+        </div>
+        <div class="form-group">
+          <input type="text" name="departamento" class="form-control"
+            placeholder="Ingrese su departamento" [(ngModel)]="formData.departamento">
+        </div>
+        <div class="form-group">
+          <input type="number" name="sueldo" class="form-control"
+            placeholder="Ingrese su sueldo" [(ngModel)]="formData.sueldo">
+        </div>
+        <button class="btn btn-primary" type="submit">Crear</button>
+        <button class="btn btn-secondary" type="button" (click)="empleadoForm.resetForm(empleadoVacio())">
+          Limpiar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

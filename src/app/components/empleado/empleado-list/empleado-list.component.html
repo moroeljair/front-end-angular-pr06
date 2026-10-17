@@ -1,0 +1,27 @@
+<div class="col-md-8">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Cargo</th>
+        <th>Departamento</th>
+        <th>Operaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empleado of empleados">
+        <td>{{ empleado.nombre }}</td>
+        <td>{{ empleado.cargo }}</td>
+        <td>{{ empleado.departamento }}</td>
+        <td>
+          <button class="btn btn-secondary" type="button" (click)="actualizar.emit(empleado)">
+            Actualizar
+          </button>
+          <button class="btn btn-danger" type="button" (click)="eliminar.emit(empleado)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
