@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpleadoService } from '../../services/empleado.service';
 import { Empleado } from '../../models/empleado';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-empleado',
@@ -8,7 +9,10 @@ import { Empleado } from '../../models/empleado';
   styleUrl: './empleado.component.css',
 })
 export class EmpleadoComponent implements OnInit {
-  constructor(public empleadoService: EmpleadoService) {}
+  constructor(
+    public empleadoService: EmpleadoService,
+    private authService: AuthService,
+  ) {}
   ngOnInit(): void {
     this.empleadoService.cargarEmpleados();
   }
@@ -22,12 +26,14 @@ export class EmpleadoComponent implements OnInit {
   }
 
   eliminarEmpleado(empleado: Empleado): void {
-    const confirmar = window.confirm(
-      `¿Deseas eliminar a ${empleado.nombre}?`,
-    );
+    const confirmar = window.confirm(`¿Deseas eliminar a ${empleado.nombre}?`);
 
     if (confirmar) {
       this.empleadoService.deleteEmpleado(empleado);
     }
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

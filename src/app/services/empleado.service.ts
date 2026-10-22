@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Empleado } from '../models/empleado';
 import { BehaviorSubject, map } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 interface ApiResponse<T> {
   success: boolean;
@@ -11,7 +12,7 @@ interface ApiResponse<T> {
 
 @Injectable({ providedIn: 'root' })
 export class EmpleadoService {
-  URL_API = 'http://localhost:3000/api/v1/empleados';
+  private readonly URL_API = `${environment.apiUrl}/empleados`;
 
   //URL_API='assets/json/empleado.json';
 

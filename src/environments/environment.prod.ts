@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://azurewebsites.net' // URL simulada del backend
+  apiUrl: 'http://localhost:3000/api/v1',
 };
