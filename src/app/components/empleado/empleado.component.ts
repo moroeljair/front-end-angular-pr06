@@ -18,11 +18,16 @@ export class EmpleadoComponent implements OnInit {
   }
 
   addEmpleado(empleado: Empleado): void {
+    if (empleado.id) {
+      this.empleadoService.updateEmpleado(empleado);
+      return;
+    }
+
     this.empleadoService.createEmpleado(empleado);
   }
 
   actualizarEmpleado(empleado: Empleado): void {
-    console.log('Actualizar empleado:', empleado);
+    this.empleadoService.selectEmpleado(empleado);
   }
 
   eliminarEmpleado(empleado: Empleado): void {

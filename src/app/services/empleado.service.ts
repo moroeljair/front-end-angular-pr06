@@ -63,6 +63,38 @@ export class EmpleadoService {
       });
   }
 
+  updateEmpleado(empleado: Empleado): void {
+    if (!empleado.id) {
+      console.error('No se puede actualizar un empleado sin id');
+      return;
+    }
+
+    const { id, nombre, cargo, departamento, sueldo } = empleado;
+
+    this.http
+      .put<ApiResponse<Empleado>>(`${this.URL_API}/${id}`, {
+        nombre,
+        cargo,
+        departamento,
+        sueldo,
+      })
+      .pipe(map((response) => response.data))
+      .subscribe({
+        next: (empleadoActualizado) => {
+          this.empleadosSubject.next(
+            this.empleadosSubject.value.map((actual) =>
+              actual.id === empleadoActualizado.id
+                ? empleadoActualizado
+                : actual,
+            ),
+          );
+          this.resetSelectedEmpleado();
+        },
+        error: (error) =>
+          console.error('No se pudo actualizar el empleado', error),
+      });
+  }
+
   deleteEmpleado(empleado: Empleado): void {
     if (!empleado.id) {
       console.error('No se puede eliminar un empleado sin _id');
@@ -88,6 +120,10 @@ export class EmpleadoService {
       ...this.selectedEmpleadoSubject.value,
       [campo]: valor,
     });
+  }
+
+  selectEmpleado(empleado: Empleado): void {
+    this.selectedEmpleadoSubject.next({ ...empleado });
   }
 
   resetSelectedEmpleado(): void {
