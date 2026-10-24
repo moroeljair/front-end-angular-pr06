@@ -19,9 +19,13 @@ export class EmpleadoFormComponent implements OnChanges {
     }
   }
 
-  guardarEmpleado(form: NgForm): void {
-    this.guardar.emit({ ...form.value });
-    form.resetForm(this.empleadoVacio());
+  guardarEmpleado(): void {
+    this.guardar.emit({ ...this.formData });
+  }
+
+  limpiarFormulario(form: NgForm): void {
+    this.formData = this.empleadoVacio();
+    form.resetForm(this.formData);
   }
 
   empleadoVacio(): Empleado {

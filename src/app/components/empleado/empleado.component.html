@@ -1,12 +1,18 @@
 <div class="row contenedor">
   <app-empleado-form
     [empleado]="empleadoService.selectedEmpleado"
-    (guardar)="addEmpleado($event)">
+    (guardar)="addEmpleado($event)"
+  >
   </app-empleado-form>
 
   <app-empleado-list
     [empleados]="(empleadoService.empleados$ | async) ?? []"
     (actualizar)="actualizarEmpleado($event)"
-    (eliminar)="eliminarEmpleado($event)">
+    (eliminar)="eliminarEmpleado($event)"
+  >
   </app-empleado-list>
+
+  <button type="button" (click)="logout()" class="button-secundary">
+    Cerrar sesión
+  </button>
 </div>
